@@ -4,6 +4,8 @@ import scala.collection.mutable
 import org.hamcrest.Matchers._
 import org.junit.Assert._
 import org.junit.Test
+import org.hamcrest.core.IsAnything
+
 /**
  * Created with IntelliJ IDEA.
  * User: daniels
@@ -38,7 +40,8 @@ class IsMapContainingTest {
   }
 
   private def containsEntry[K, V](p: (K, V)) = new IsMapContaining[K, V](is(p._1), is(p._2))
-  private def containsKey[K](k: K) = new IsMapContaining[K, Any](is(k), anything())
-  private def containsValue[V](v: V) = new IsMapContaining[Any, V](anything(), is(v))
+  private def containsKey[K](k: K) = new IsMapContaining[K, Any](is(k), anything)
+  private def containsValue[V](v: V) = new IsMapContaining[Any, V](anything, is(v))
+  private val anything = new IsAnything[Any]()
 
 }
