@@ -14,10 +14,23 @@ import org.hamcrest.Matchers._
 @RunWith(classOf[JUnitRunner])
 class UsageTest extends FlatSpec with ShouldMatchers with ScalatestHamcrestMatchers {
 
-  "An iterable matcher" should "be matched" in {
-    val i = Seq("a", "b")
-    i should HaveItem("a")
-    i should HaveItem(startsWith("b"))
-    i should not(HaveItem("c"))
+  "examples" should "be self-explainable" in {
+
+    // iterable
+    Set("a", "b").toSeq should HaveItem(startsWith("b"))
+    Seq("a", "b") should HaveItem(startsWith("b"))
+    List("a", "b") should HaveItem(startsWith("b"))
+    Iterable("a", "b").toSeq should HaveItem(startsWith("b"))
+    Array("a", "b").toSeq should HaveItem(startsWith("b"))
+
+    // map
+    Map("key1" -> "value1") should HaveKey("key1")
+    Map("key1" -> "value1") should HaveValue("value1")
+    Map("key1" -> "value1") should HaveEntry("key1" -> "value1")
+    Map("key1" -> "value1") should HaveEntry(is("key1"), containsString("value1"))
+
+    // option
+    None should BeNone
+    Some("haha") should BeSome(startsWith("ha"))
   }
 }
